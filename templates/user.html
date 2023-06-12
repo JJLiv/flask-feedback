@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}User Info{% endblock %}
+
+
+{% block content %}
+
+    {% if 'username' in session %}
+    <ul>
+        <li>{{user.username}}</li>
+        <li>{{user.email}}</li>
+        <li>{{user.first_name}}</li>
+        <li>{{user.last_name}}</li>
+
+        {% for fb in user.feeback %}
+        <li>
+            <b>{{fb.title}}</b>
+            <p>fb.content</p>
+            <a href="/feedback/{{fb.id}}/update" type="button">Edit</a>
+            <a href="/feedback/{{fb.id}}/delete" type="button">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% endif %}
+
+    <a href="/users/{{user.username}}/feedback/add" type="button">Add Feedback</a>
+    <a href="/users/{{user.username}}/delete" type="button">Delete User</a>
+
+{% endblock %}
